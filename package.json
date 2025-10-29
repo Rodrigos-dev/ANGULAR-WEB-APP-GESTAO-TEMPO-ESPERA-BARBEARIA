@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "nx serve my-barbershop",
+    "serve": "nx serve my-barbershop",
+    "dev": "nx serve my-barbershop",
+    "build": "nx build my-barbershop",
+    "test": "nx test my-barbershop",
+    "lint": "nx lint my-barbershop"
   },
   "private": true,
   "dependencies": {
