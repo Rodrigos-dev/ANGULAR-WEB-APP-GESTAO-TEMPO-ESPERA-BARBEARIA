@@ -1,0 +1,18 @@
+{
+  "DOMAIN": {
+    "AUTH": {
+      "PAGES": {
+        "LOGIN": {
+          "TITLE": "Entrar",
+          "EMAIL": "E-mail",
+          "PASSWORD": "Senha",
+          "REMEMBER_ME": "Lembra-se",
+          "FORGOT_PASSWORD": "Esqueceu a senha?",
+          "LOGIN": "Entrar",
+          "NO_ACCOUNT": "Não tem uma conta?",
+          "SIGN_UP": "Cadastre-se"
+        }
+      }
+    }
+  }
+}
