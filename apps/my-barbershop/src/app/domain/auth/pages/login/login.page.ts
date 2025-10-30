@@ -1,18 +1,19 @@
 import { ThemeService } from 'apps/my-barbershop/src/app/shared/services/theme/theme.service';
+import { NzButtonComponent } from 'ng-zorro-antd/button';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
 
 import { Component, inject } from '@angular/core';
-import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'mb-login',
-  imports: [TranslocoModule],
+  imports: [NzFlexModule, NzButtonComponent],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss',
 })
 export class LoginPage {
   private readonly themeService = inject(ThemeService);
 
-  changeLang() {
+  toggleTheme() {
     this.themeService.toggleTheme();
   }
 }
