@@ -110,5 +110,8 @@
       "type": "boolean",
       "default": false
     }
-  ]
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

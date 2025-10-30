@@ -1,5 +1,7 @@
+import { ThemeService } from 'apps/my-barbershop/src/app/shared/services/theme/theme.service';
+
 import { Component, inject } from '@angular/core';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'mb-login',
@@ -8,9 +10,9 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
   styleUrl: './login.page.scss',
 })
 export class LoginPage {
-  private readonly translocoService = inject(TranslocoService);
+  private readonly themeService = inject(ThemeService);
 
-  changeLang(lang: string) {
-    this.translocoService.setActiveLang(lang);
+  changeLang() {
+    this.themeService.toggleTheme();
   }
 }

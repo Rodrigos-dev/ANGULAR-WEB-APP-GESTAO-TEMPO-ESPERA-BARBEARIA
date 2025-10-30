@@ -8,15 +8,11 @@
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/my-barbershop",
         "browser": "apps/my-barbershop/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/my-barbershop/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -26,8 +22,17 @@
           }
         ],
         "styles": [
-          "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-          "apps/my-barbershop/src/styles.scss"
+          "apps/my-barbershop/src/styles.scss",
+          {
+            "input": "apps/my-barbershop/src/styles/default.less",
+            "bundleName": "default",
+            "inject": false
+          },
+          {
+            "input": "apps/my-barbershop/src/styles/dark.less",
+            "bundleName": "dark",
+            "inject": false
+          }
         ]
       },
       "configurations": {
@@ -78,9 +83,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/my-barbershop/jest.config.ts",
         "tsConfig": "apps/my-barbershop/tsconfig.spec.json"

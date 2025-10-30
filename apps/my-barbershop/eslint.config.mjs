@@ -14,7 +14,7 @@ export default [
           type: 'attribute',
           prefix: 'mb',
           style: 'camelCase',
-        },
+        },        
       ],
       '@angular-eslint/component-selector': [
         'error',
