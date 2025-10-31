@@ -1,4 +1,4 @@
-<form nz-form nzLayout="vertical" [formGroup]="loginForm">
+<!-- <form nz-form nzLayout="vertical" [formGroup]="loginForm">
   <nz-form-item>
     <nz-form-label nzFor="email">E-mail</nz-form-label>
     <nz-form-control>
@@ -14,6 +14,8 @@
 
     <a routerLink="/auth/forgot-password">Esqueceu sua senha?</a>
   </nz-form-item>
-</form>
+</form> -->
 
-<button nzBlock nz-button nzType="primary" (click)="login()">Login</button>
+<mb-dynamic-form [config]="loginConfig" />
+
+<button nz-button nzType="primary" nzBlock (click)="login()" [disabled]="dynamicForm?.form?.invalid">Login</button>
