@@ -24,24 +24,6 @@ export class ForgotPasswordPage {
   private readonly notificationService = inject(NzNotificationService);
   protected loadingService = inject(LoadingService);
 
-  // email = signal('');
-
-  // async submit() {
-  //   this.loadingService.start();
-
-  //   const data = await this.supabase.auth.resetPasswordForEmail(this.email());
-
-  //   if (data.error) {
-  //     this.notificationService.error('Erro ao enviar e-mail', 'Alguma coisa deu errado');
-  //   } else {
-  //     this.notificationService.success('E-mail enviado', 'Verifique sua caixa de entrada');
-  //   }
-
-  //   this.email.set('');
-
-  //   this.loadingService.stop();
-  // }
-
   formConfig: iDynamicFormConfig[] = [
     {
       label: 'Email',

@@ -26,32 +26,6 @@ export class LoginPage {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
 
-  // loginForm: FormGroup;
-
-  // constructor() {
-  //   this.loginForm = new FormGroup({
-  //     email: new FormControl('', [Validators.required, Validators.email]),
-  //     password: new FormControl('', [Validators.required]),
-  //   });
-  // }
-
-  // async login() {
-  //   if (!this.loginForm.valid) {
-  //     this.notificationService.error('Erro', 'Preencha os campos corretamente');
-  //     return;
-  //   }
-
-  //   const { email, password } = this.loginForm.value;
-  //   const { error } = await this.supabase.auth.signInWithPassword({ email, password });
-
-  //   if (error) {
-  //     this.notificationService.error('Erro ao fazer login', 'Verifique suas credenciais e tente novamente');
-  //     return;
-  //   }
-
-  //   this.router.navigate(['/']);
-  // }
-
   loginConfig: iDynamicFormConfig[] = [
     {
       label: 'Email',

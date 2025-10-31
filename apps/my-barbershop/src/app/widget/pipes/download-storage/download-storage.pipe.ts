@@ -8,7 +8,7 @@ import { eBucketName } from '../../../shared/enums/bucket-name.enum';
   standalone: true,
 })
 export class DownloadStoragePipe implements PipeTransform {
-  private storageApi = inject(StorageApi);
+  private readonly storageApi = inject(StorageApi);
 
   async transform(imageUrl?: string | File | null, bucket = eBucketName.AVATARS): Promise<string> {
     if (!imageUrl) return '';
