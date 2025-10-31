@@ -1,0 +1,10 @@
+nz-card {
+  margin: 0 auto;
+  top: 2rem;
+  width: 450px;
+}
+@media screen and (max-width: 960px) {
+  nz-card {
+    width: 90vw;
+  }
+}/*# sourceMappingURL=auth.layout.css.map */

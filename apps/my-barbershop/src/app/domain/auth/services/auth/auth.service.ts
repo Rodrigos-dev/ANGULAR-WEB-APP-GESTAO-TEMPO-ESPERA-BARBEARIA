@@ -1,0 +1,39 @@
+import { injectSupabase } from 'apps/my-barbershop/src/app/shared/functions/inject-supabase.function';
+
+import { inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { iUser } from '../../interfaces/user.interface';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  private readonly supabase = injectSupabase();
+  private readonly router = inject(Router);
+
+  currentUser = signal<iUser | null>(null);
+  isLoggedIn = signal<boolean>(false);
+
+  async load() {
+    const { data } = await this.supabase.auth.getSession();
+    if (!data.session) {
+      return;
+    }
+
+    const user = data.session.user as unknown as iUser;
+    this.currentUser.set(user);
+    this.isLoggedIn.set(true);
+
+    console.log('userLogado: - auth.service.ts:28', this.currentUser());
+  }
+
+  async purgeAndRedirect() {
+    await this.supabase.auth.signOut();
+
+    this.currentUser.set(null);
+    this.isLoggedIn.set(false);
+
+    this.router.navigate(['/auth']);
+  }
+}
