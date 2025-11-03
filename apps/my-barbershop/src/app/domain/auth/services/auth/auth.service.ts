@@ -36,4 +36,16 @@ export class AuthService {
 
     this.router.navigate(['/auth']);
   }
+
+  async updateUser(data: Partial<iUser>, id?: string) {
+    const { data: user, error } = await this.supabase
+      .from('users')
+      .update(data)
+      .match({ id: id || this.currentUser()?.id })
+      .select('*')
+      .maybeSingle();
+
+    if (error) throw error;
+    this.currentUser.set(user as iUser);
+  }
 }

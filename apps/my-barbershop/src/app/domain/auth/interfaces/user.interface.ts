@@ -4,7 +4,7 @@ export interface iUser {
   id: string;
   fullname: string;
   email: string;
-  //phone: string;
+  phone: string;
   avatar_url: string;
   status: eUserStatus;
 }

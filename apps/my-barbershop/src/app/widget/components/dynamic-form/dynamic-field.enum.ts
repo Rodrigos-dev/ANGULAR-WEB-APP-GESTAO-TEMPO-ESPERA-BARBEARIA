@@ -9,6 +9,8 @@ export enum eDynamicField {
   DATE_TIME = 'date_time',
   SWITCH = 'switch',
   AVATAR = 'avatar',
+  TERMS_POLICY = 'terms_policy',
+  SELECT_USER = 'select_user',
   DIVIDER = 'divider',
   RADIO = 'radio',
   IMAGE = 'image',
