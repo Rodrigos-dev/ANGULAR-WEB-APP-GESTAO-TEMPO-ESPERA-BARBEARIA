@@ -62,8 +62,8 @@ export class SubscriptionService {
   async submit() {
     try {
       await this.createAdminUser(this.getAdminForm());
-      const company = await this.createCompany(this.getCompanyForm());
-      await this.createSubscription(company.id);
+      const createdCompany = await this.createCompany(this.getCompanyForm());
+      await this.createSubscription(createdCompany.id);
 
       this.router.navigate(['/']);
       this.form.reset();
@@ -83,6 +83,7 @@ export class SubscriptionService {
       options: {
         data: {
           full_name: name,
+          email_confirm: true,
         },
       },
     };
@@ -148,11 +149,13 @@ export class SubscriptionService {
       email: user.email,
       phone: user.phone,
     };
-
-    const { data, error } = await this.supabase.functions.invoke('create_subscription', {
+    const { data, error } = await this.supabase.functions.invoke('create-subscription', {
       body: JSON.stringify(payload),
     });
-    if (error) throw new Error('Erro ao cadastrar assinatura');
+
+    if (error) {
+      throw new Error('Erro ao criar assinatura');
+    }
 
     return data;
   }
