@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
 
+import { authGuard } from './core/guards/auth/auth.guard';
+
 export const appRoutes: Route[] = [
   {
     path: 'subscription',
@@ -16,6 +18,26 @@ export const appRoutes: Route[] = [
       {
         path: 'reset-password',
         loadComponent: () => import('./core/pages/reset-password/reset-password.page').then(m => m.ResetPasswordPage),
+      },
+    ],
+  },
+  {
+    path: '',
+    loadComponent: () => import('./core/layout/shell/shell.layout').then(m => m.ShellLayout),
+    children: [
+      {
+        path: 'dashboard',
+        canActivate: [authGuard],
+        loadChildren: () => import('./domain/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
+      },
+      // {
+      //   path: 'view',
+      //   loadChildren: () => import('./domain/storefront/storefront.routes').then(m => m.STOREFRONT_ROUTES),
+      // },
+      {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
       },
     ],
   },
