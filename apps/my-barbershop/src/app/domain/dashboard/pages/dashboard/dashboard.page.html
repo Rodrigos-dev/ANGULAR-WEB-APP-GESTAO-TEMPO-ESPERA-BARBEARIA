@@ -10,7 +10,7 @@
         <i nz-icon nzType="share-alt"></i>
         Compartilhar
       </button>
-      <button nz-button>
+      <button nz-button [routerLink]="['/view']">
         <i nz-icon nzType="eye"></i>
         Ver página pública
       </button>
@@ -83,6 +83,11 @@
 
       <mb-dynamic-form [config]="configForm" />
     </nz-flex>
+
+    <button nz-button nzType="primary" nzBlock (click)="submit()">
+      <i nz-icon nzType="save"></i>
+      Salvar Alterações
+    </button>
   </nz-card>
   }
 </nz-flex>

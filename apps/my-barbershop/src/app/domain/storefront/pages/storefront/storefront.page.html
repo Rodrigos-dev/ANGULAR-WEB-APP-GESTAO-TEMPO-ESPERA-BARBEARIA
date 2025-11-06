@@ -1,0 +1,42 @@
+<nz-card>
+  <nz-flex nzVertical nzJustify="center" nzAlign="center" class="text-center">
+    <nz-flex nzVertical nzJustify="center" nzAlign="center" class="text-center">
+      <h1>QueuePro Barber</h1>
+      <nz-tag nzColor="success">
+        <nz-badge nzStatus="success"></nz-badge>
+        Aberto
+      </nz-tag>
+    </nz-flex>
+
+    <br />
+
+    <nz-flex nzVertical nzJustify="center" nzAlign="center" class="text-center">
+      <nz-countdown [nzValue]="deadline" nzTitle="Tempo de Espera Estimado"></nz-countdown>
+    </nz-flex>
+
+    <nz-divider></nz-divider>
+
+    <nz-flex nzVertical [nzGap]="'middle'">
+      <nz-card>
+        <nz-card-meta [nzTitle]="'Nossos Serviços'" [nzDescription]="'Corte de Cabelo, Barba, Bigode, Lavagem'" [nzAvatar]="cardService"></nz-card-meta>
+        <ng-template #cardService>
+          <i nz-icon nzType="scissor"></i>
+        </ng-template>
+      </nz-card>
+
+      <nz-card>
+        <nz-card-meta [nzTitle]="'Endereço'" [nzDescription]="'Av. Principal, 123 - Centro'" [nzAvatar]="cardIcon"></nz-card-meta>
+        <ng-template #cardIcon>
+          <i nz-icon nzType="environment"></i>
+        </ng-template>
+      </nz-card>
+
+      <nz-card>
+        <nz-card-meta [nzTitle]="'Horário de Funcionamento'" [nzDescription]="'Segunda a Sexta, 08:00 - 18:00, Sabado: 08:00 - 14:00'" [nzAvatar]="cardClock"></nz-card-meta>
+        <ng-template #cardClock>
+          <i nz-icon nzType="clock-circle"></i>
+        </ng-template>
+      </nz-card>
+    </nz-flex>
+  </nz-flex>
+</nz-card>

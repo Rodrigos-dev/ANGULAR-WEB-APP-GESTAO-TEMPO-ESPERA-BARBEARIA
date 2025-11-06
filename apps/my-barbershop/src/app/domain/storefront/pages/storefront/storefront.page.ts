@@ -21,13 +21,13 @@ import { Component, Input, OnInit } from '@angular/core';
     NzBadgeModule,
     NzButtonModule,
     NzCardModule,
-    NzIconModule,
     NzDividerModule,
     NzGridModule,
     NzTagModule,
     NzFlexDirective,
     NzStatisticModule,
     NzTypographyModule,
+    NzIconModule,
   ],
   templateUrl: './storefront.page.html',
   styleUrl: './storefront.page.scss',
@@ -35,7 +35,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StorefrontPage implements OnInit {
   @Input() id = '';
 
+  deadline = Date.now() + 150 * 60 * 1000;
+
   ngOnInit() {
-    console.log('StorefrontPage initialized with id: - storefront.page.ts:39', this.id);
+    console.log('StorefrontPage initialized with id: - storefront.page.ts:41', this.id);
   }
 }

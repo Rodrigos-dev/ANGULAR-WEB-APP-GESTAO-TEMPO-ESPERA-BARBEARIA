@@ -1,4 +1,5 @@
 import { injectSupabase } from 'apps/my-barbershop/src/app/shared/functions/inject-supabase.function';
+import { CompanyService } from 'apps/my-barbershop/src/app/shared/services/company/company.service';
 
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { iUser } from '../../interfaces/user.interface';
 export class AuthService {
   private readonly supabase = injectSupabase();
   private readonly router = inject(Router);
+  private readonly companyService = inject(CompanyService);
 
   currentUser = signal<iUser | null>(null);
   isLoggedIn = signal<boolean>(false);
@@ -25,7 +27,7 @@ export class AuthService {
     this.currentUser.set(user);
     this.isLoggedIn.set(true);
 
-    console.log('userLogado: - auth.service.ts:28', this.currentUser());
+    await this.companyService.load(user);
   }
 
   async purgeAndRedirect() {

@@ -1,0 +1,57 @@
+import { inject, Injectable } from '@angular/core';
+import { RealtimeChannel } from '@supabase/supabase-js';
+
+import { iStorefront } from '../interfaces/storefront.interface';
+import { CompanyService } from '../services/company/company.service';
+import { BaseApi } from './base.api';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class StorefrontApi extends BaseApi<iStorefront> {
+  private readonly companyService = inject(CompanyService);
+
+  constructor() {
+    super('storefronts');
+  }
+
+  async getByCompanyId() {
+    const company_id = this.companyService.company()?.id;
+    const { data } = await this.select('*').match({ company_id }).limit(1).maybeSingle();
+    return data as iStorefront | null;
+  }
+
+  async updateTimeAndStatus(id: string, estimated_finish_time: string | null, is_open: boolean) {
+    const { data, error } = await this.update({ estimated_finish_time, is_open }).eq('id', id).select().single();
+
+    return { data: data as iStorefront | null, error };
+  }
+
+  getWaitingTimeInMinutes(estimated_finish_time: string | null): number {
+    if (!estimated_finish_time) return 0;
+
+    const now = new Date().getTime();
+    const finishTime = new Date(estimated_finish_time).getTime();
+    const diffMs = finishTime - now;
+
+    return Math.max(0, Math.ceil(diffMs / 60000));
+  }
+
+  subscribeToStorefrontChanges(storefrontId: string, callback: (data: iStorefront) => void): RealtimeChannel {
+    return this.supabase
+      .channel(`storefront-${storefrontId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'storefronts',
+          filter: `id=eq.${storefrontId}`,
+        },
+        payload => {
+          callback(payload.new as iStorefront);
+        },
+      )
+      .subscribe();
+  }
+}
