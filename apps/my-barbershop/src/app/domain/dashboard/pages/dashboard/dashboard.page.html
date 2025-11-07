@@ -22,11 +22,27 @@
   @if(selectedOption === eDashboardSegmentedOptions.TimeAndStatus){
   <nz-card>
     <div>
-      <h1>Painel Administrativo</h1>
-      <span nz-typography nzType="secondary">Ajuste o tempo de espera atual e o status da loja em tempo real</span>
+      <h1>Fila de Espera e Status</h1>
+      <span nz-typography nzType="secondary">Gerencie o tempo de espera da fila de clientes.</span>
     </div>
 
-    <h3>Tempo de espera: <strong>5 minutos</strong></h3>
+    <br />
+
+    @if (hasWaitingTime()) {
+    <nz-flex nzAlign="center" nzGap="small">
+      <h2 class="countdown-title">
+        <strong>Tempo Total da Fila:</strong>
+      </h2>
+      <strong>
+        <nz-countdown [nzValue]="deadline()" [nzValueStyle]="{ color: '#52c41a' }"></nz-countdown>
+      </strong>
+    </nz-flex>
+
+    } @else {
+    <h3 [style.color]="'#52c41a'">Sem fila no momento</h3>
+    }
+
+    <br />
 
     <nz-flex nzAlign="center" nzGap="small">
       <button nz-button>-</button>
@@ -36,15 +52,17 @@
       <button nz-button>+</button>
     </nz-flex>
 
+    <br />
+
     <nz-row [nzGutter]="[24, 24]">
       <nz-col [nzLg]="12" [nzXs]="24">
         <nz-flex nzVertical nzAlign="center">
           <span nz-typography nzType="secondary">Diminuir</span>
 
           <nz-flex nzGap="small" class="w-full">
-            <button nz-button nzBlock nzDanger>-5 min</button>
-            <button nz-button nzBlock nzDanger>-10 min</button>
-            <button nz-button nzBlock nzDanger>-15 min</button>
+            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-5)">-5 min</button>
+            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-10)">-10 min</button>
+            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-15)">-15 min</button>
           </nz-flex>
         </nz-flex>
       </nz-col>
@@ -54,9 +72,9 @@
           <span nz-typography nzType="secondary">Aumentar</span>
 
           <nz-flex nzGap="small" class="w-full">
-            <button nz-button nzBlock>+5 min</button>
-            <button nz-button nzBlock>+10 min</button>
-            <button nz-button nzBlock>+15 min</button>
+            <button nz-button nzBlock (click)="adjustWaitingTime(5)">+5 min</button>
+            <button nz-button nzBlock (click)="adjustWaitingTime(10)">+10 min</button>
+            <button nz-button nzBlock (click)="adjustWaitingTime(15)">+15 min</button>
           </nz-flex>
         </nz-flex>
       </nz-col>
@@ -68,8 +86,8 @@
       <h3>Status da Loja</h3>
 
       <nz-flex nzGap="middle">
-        <nz-switch></nz-switch>
-        <span nz-typography nzType="secondary">Fechada</span>
+        <nz-switch [ngModel]="isOpen()" (ngModelChange)="toggleStoreStatus()"></nz-switch>
+        <span nz-typography nzType="secondary">{{ isOpen() ? 'Aberta' : 'Fechada' }}</span>
       </nz-flex>
     </nz-flex>
   </nz-card>
