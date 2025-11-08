@@ -20,6 +20,7 @@ import { Component, computed, inject, OnDestroy, OnInit, signal, ViewChild } fro
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { ShareModalComponent } from '../../components/share-modal/share-modal.component';
 import { STOREFRONT_FORM_CONFIG } from '../../constants/storefront-form.constant';
 
 enum eDashboardSegmentedOptions {
@@ -256,7 +257,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     try {
       await this.autoSaveTimeAndStatus();
     } catch (error) {
-      console.error('Erro no autosave: - dashboard.page.ts:259', error);
+      console.error('Erro no autosave: - dashboard.page.ts:260', error);
     } finally {
       this.isSaving = false;
     }
@@ -284,7 +285,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     // Calcula a diferença
     const difference = currentValue - previousValue;
 
-    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:287`);
+    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:288`);
 
     // ⭐ Só executa se houver mudança real no valor (diferença != 0)
     if (difference !== 0) {
@@ -326,7 +327,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     clearInterval(this.sliderUpdateInterval);
 
     this.sliderUpdateInterval = setInterval(() => {
-      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:329');
+      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:330');
       this.updateSliderFromCurrentTime();
     }, 60000);
   }
@@ -349,5 +350,21 @@ export class DashboardPage implements OnInit, OnDestroy {
       clearInterval(this.sliderUpdateInterval);
       this.sliderUpdateInterval = null;
     }
+  }
+
+  //MODAL
+  async showShareModal() {
+    const storefront = this.storefrontData();
+    if (!storefront?.id) {
+      this.notificationService.error('Erro', 'ID da loja não encontrado.');
+      return;
+    }
+
+    this.modal.create({
+      nzTitle: 'Compartilhar Página da Barbearia',
+      nzContent: ShareModalComponent,
+      nzData: { storefrontId: storefront.id },
+      nzFooter: null,
+    });
   }
 }

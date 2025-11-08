@@ -6,11 +6,11 @@
     </div>
 
     <nz-flex nzGap="small">
-      <button nz-button>
+      <button nz-button (click)="showShareModal()" [disabled]="!storefrontData()">
         <i nz-icon nzType="share-alt"></i>
         Compartilhar
       </button>
-      <button nz-button [routerLink]="['/view']">
+      <button nz-button [routerLink]="storefrontData()?.id ? ['/view', storefrontData()?.id] : ['/view']">
         <i nz-icon nzType="eye"></i>
         Ver página pública
       </button>
