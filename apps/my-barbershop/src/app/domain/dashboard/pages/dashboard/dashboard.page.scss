@@ -10,3 +10,27 @@ nz-slider {
   font-weight: 500;
   margin: 0;
 }
+
+.red-outline-btn {
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+  background: transparent;
+}
+
+.red-outline-btn:hover {
+  background-color: #ff4d4f;
+  color: white;
+  border-color: #ff4d4f;
+}
+
+.green-outline-btn {
+  color: #3ab07b;
+  border-color: #3ab07b;
+  background: transparent;
+}
+
+.green-outline-btn:hover {
+  background-color: #3ab07b;
+  color: white;
+  border-color: #3ab07b;
+}

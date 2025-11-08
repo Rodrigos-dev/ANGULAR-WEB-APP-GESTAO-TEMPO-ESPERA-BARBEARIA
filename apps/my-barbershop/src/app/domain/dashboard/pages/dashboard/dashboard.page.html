@@ -34,7 +34,7 @@
         <strong>Tempo Total da Fila:</strong>
       </h2>
       <strong>
-        <nz-countdown [nzValue]="deadline()" [nzValueStyle]="{ color: '#52c41a' }"></nz-countdown>
+        <nz-countdown [nzValue]="deadline()" [nzValueStyle]="{ color: '#3AB07B' }"></nz-countdown>
       </strong>
     </nz-flex>
 
@@ -45,11 +45,11 @@
     <br />
 
     <nz-flex nzAlign="center" nzGap="small">
-      <button nz-button>-</button>
+      <button nz-button (click)="adjustWaitingTime(-1)" class="red-outline-btn">-</button>
 
-      <nz-slider></nz-slider>
+      <nz-slider [nzMin]="0" [nzMax]="240" [nzStep]="1" [nzTipFormatter]="formatSliderTip" [(ngModel)]="sliderValue" (nzOnAfterChange)="onSliderChange()"></nz-slider>
 
-      <button nz-button>+</button>
+      <button nz-button (click)="adjustWaitingTime(1)" class="green-outline-btn">+</button>
     </nz-flex>
 
     <br />
@@ -60,9 +60,9 @@
           <span nz-typography nzType="secondary">Diminuir</span>
 
           <nz-flex nzGap="small" class="w-full">
-            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-5)">-5 min</button>
-            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-10)">-10 min</button>
-            <button nz-button nzBlock nzDanger (click)="adjustWaitingTime(-15)">-15 min</button>
+            <button nz-button nzBlock nzDanger (click)="clickButtonPreConfig(-5)">-5 min</button>
+            <button nz-button nzBlock nzDanger (click)="clickButtonPreConfig(-10)">-10 min</button>
+            <button nz-button nzBlock nzDanger (click)="clickButtonPreConfig(-15)">-15 min</button>
           </nz-flex>
         </nz-flex>
       </nz-col>
@@ -72,9 +72,9 @@
           <span nz-typography nzType="secondary">Aumentar</span>
 
           <nz-flex nzGap="small" class="w-full">
-            <button nz-button nzBlock (click)="adjustWaitingTime(5)">+5 min</button>
-            <button nz-button nzBlock (click)="adjustWaitingTime(10)">+10 min</button>
-            <button nz-button nzBlock (click)="adjustWaitingTime(15)">+15 min</button>
+            <button nz-button nzBlock (click)="clickButtonPreConfig(5)">+5 min</button>
+            <button nz-button nzBlock (click)="clickButtonPreConfig(10)">+10 min</button>
+            <button nz-button nzBlock (click)="clickButtonPreConfig(15)">+15 min</button>
           </nz-flex>
         </nz-flex>
       </nz-col>
