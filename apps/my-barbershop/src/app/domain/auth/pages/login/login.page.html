@@ -1,4 +1,9 @@
 <mb-dynamic-form [config]="loginConfig" />
 
+@if (loadingService.loading()) {
+<nz-spin nzTip="Aguarde..."></nz-spin>
+<br />
+}@else {
 <button nz-button nzType="primary" nzBlock (click)="login()" [disabled]="dynamicForm?.form?.invalid">Login</button>
 <button nz-button nzType="link" nzBlock routerLink="/subscription">Criar Conta</button>
+}
