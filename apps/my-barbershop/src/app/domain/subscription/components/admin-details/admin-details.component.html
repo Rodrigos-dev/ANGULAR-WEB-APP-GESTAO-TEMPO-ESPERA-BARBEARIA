@@ -5,6 +5,10 @@
 <mb-dynamic-form [config]="formConfig" />
 
 <nz-flex nzGap="small" nzJustify="center">
+  <button nz-button nzType="primary" [routerLink]="['/auth']">
+    <i nz-icon nzType="arrow-left"></i>
+    Voltar Login
+  </button>
   <button nz-button nzType="primary" [routerLink]="['/subscription', 'company']">
     Próxima etapa
     <i nz-icon nzType="arrow-right"></i>

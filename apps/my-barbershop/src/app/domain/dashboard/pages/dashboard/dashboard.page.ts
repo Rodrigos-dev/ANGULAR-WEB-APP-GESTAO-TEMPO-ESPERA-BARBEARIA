@@ -3,6 +3,7 @@ import { StorefrontApi } from 'apps/my-barbershop/src/app/shared/apis/storefront
 import { eBucketName } from 'apps/my-barbershop/src/app/shared/enums/bucket-name.enum';
 import { iStorefront } from 'apps/my-barbershop/src/app/shared/interfaces/storefront.interface';
 import { CompanyService } from 'apps/my-barbershop/src/app/shared/services/company/company.service';
+import { LoadingService } from 'apps/my-barbershop/src/app/shared/services/loading/loading.service';
 import { iDynamicFormConfig } from 'apps/my-barbershop/src/app/widget/components/dynamic-form/dynamic-form-config.interface';
 import { DynamicFormComponent } from 'apps/my-barbershop/src/app/widget/components/dynamic-form/dynamic-form.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -14,6 +15,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzSpinComponent } from 'ng-zorro-antd/spin';
 import { NzCountdownComponent } from 'ng-zorro-antd/statistic';
 import { NzSwitchComponent, NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -46,6 +48,7 @@ enum eDashboardSegmentedOptions {
     RouterModule,
     FormsModule,
     NzCountdownComponent,
+    NzSpinComponent,
   ],
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
@@ -56,6 +59,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   private readonly notificationService = inject(NzNotificationService);
   private readonly modal = inject(NzModalService);
   private readonly storageApi = inject(StorageApi);
+  protected loadingService = inject(LoadingService);
 
   storefrontData = signal<iStorefront | null>(null);
   isOpen = signal<boolean>(false);
@@ -194,25 +198,31 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   async submit() {
-    const formValues = this.dynamicForm?.form.value;
-    const storefront = this.storefrontData();
+    try {
+      this.loadingService.start();
 
-    const photo = formValues.photo !== storefront?.photo ? await this.storageApi.insert(eBucketName.AVATARS, formValues.photo, storefront?.photo) : storefront?.photo;
+      const formValues = this.dynamicForm?.form.value;
+      const storefront = this.storefrontData();
 
-    const { error } = await this.storefrontApi.insertOrUpdate({
-      id: this.storefrontData()?.id,
-      ...formValues,
-      ...storefront,
-      ...formValues,
-      photo: photo || '',
-      is_open: this.isOpen(),
-    });
-    if (error) {
-      this.notificationService.error('Erro', 'Ocorreu um erro ao salvar as configurações.');
-      return;
+      const photo = formValues.photo !== storefront?.photo ? await this.storageApi.insert(eBucketName.AVATARS, formValues.photo, storefront?.photo) : storefront?.photo;
+
+      const { error } = await this.storefrontApi.insertOrUpdate({
+        id: this.storefrontData()?.id,
+        ...formValues,
+        ...storefront,
+        ...formValues,
+        photo: photo || '',
+        is_open: this.isOpen(),
+      });
+      if (error) {
+        this.notificationService.error('Erro', 'Ocorreu um erro ao salvar as configurações.');
+        return;
+      }
+
+      this.notificationService.success('Sucesso', 'Configurações salvas com sucesso!');
+    } finally {
+      this.loadingService.stop();
     }
-
-    this.notificationService.success('Sucesso', 'Configurações salvas com sucesso!');
   }
 
   //----
@@ -267,7 +277,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     try {
       await this.autoSaveTimeAndStatus();
     } catch (error) {
-      console.error('Erro no autosave: - dashboard.page.ts:270', error);
+      console.error('Erro no autosave: - dashboard.page.ts:280', error);
     } finally {
       this.isSaving = false;
     }
@@ -295,7 +305,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     // Calcula a diferença
     const difference = currentValue - previousValue;
 
-    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:298`);
+    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:308`);
 
     // ⭐ Só executa se houver mudança real no valor (diferença != 0)
     if (difference !== 0) {
@@ -337,7 +347,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     clearInterval(this.sliderUpdateInterval);
 
     this.sliderUpdateInterval = setInterval(() => {
-      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:340');
+      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:350');
       this.updateSliderFromCurrentTime();
     }, 60000);
   }

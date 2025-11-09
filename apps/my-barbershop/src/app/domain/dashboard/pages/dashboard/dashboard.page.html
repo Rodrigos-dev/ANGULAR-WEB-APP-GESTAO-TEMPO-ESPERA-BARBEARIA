@@ -102,10 +102,15 @@
       <mb-dynamic-form [config]="configForm" />
     </nz-flex>
 
+    @if (loadingService.loading()) {
+    <nz-spin nzTip="Aguarde..."></nz-spin>
+    <br />
+    }@else {
     <button nz-button nzType="primary" nzBlock (click)="submit()">
       <i nz-icon nzType="save"></i>
       Salvar Alterações
     </button>
+    }
   </nz-card>
   }
 </nz-flex>
