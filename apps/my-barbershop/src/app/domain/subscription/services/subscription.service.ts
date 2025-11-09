@@ -1,8 +1,5 @@
-import { NzMessageService } from 'ng-zorro-antd/message';
-
 import { inject, Injectable, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { injectSupabase } from '../../../shared/functions/inject-supabase.function';
 import { iCompany } from '../../../shared/interfaces/company.interface';
@@ -17,9 +14,7 @@ import { eSubscriptionStep } from '../enums/subscription-step.enum';
 export class SubscriptionService {
   private readonly authService = inject(AuthService);
   private readonly supabase = injectSupabase();
-  private readonly messageService = inject(NzMessageService);
   private readonly userCompanyApi = inject(UserCompanyApi);
-  private readonly router = inject(Router);
 
   currentStep = signal<eSubscriptionStep>(eSubscriptionStep.ADMIN);
 
@@ -59,18 +54,29 @@ export class SubscriptionService {
     return this.form.get('plan') as FormGroup;
   }
 
-  async submit() {
-    try {
-      await this.createAdminUser(this.getAdminForm());
-      const createdCompany = await this.createCompany(this.getCompanyForm());
-      await this.createSubscription(createdCompany.id);
+  // async submit() {
+  //   try {
+  //     await this.createAdminUser(this.getAdminForm());
+  //     const createdCompany = await this.createCompany(this.getCompanyForm());
+  //     await this.createSubscription(createdCompany.id);
 
-      this.router.navigate(['/']);
-      this.form.reset();
-    } catch (error: unknown) {
-      if (error instanceof Error) this.messageService.error(error.message);
-      else this.messageService.error('Erro ao criar assinatura');
-    }
+  //     localStorage.removeItem('subscription-form');
+
+  //     this.router.navigate(['/']);
+  //     this.form.reset();
+  //   } catch (error: unknown) {
+  //     if (error instanceof Error) this.messageService.error(error.message);
+  //     else this.messageService.error('Erro ao criar assinatura');
+  //   }
+  // }
+
+  async submit(): Promise<void> {
+    // Apenas LÓGICA DE NEGÓCIO/DADOS
+    await this.createAdminUser(this.getAdminForm());
+    const createdCompany = await this.createCompany(this.getCompanyForm());
+    await this.createSubscription(createdCompany.id);
+
+    this.form.reset();
   }
 
   private async createAdminUser(adminForm: FormGroup) {

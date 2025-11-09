@@ -1,5 +1,6 @@
 import { StorefrontApi } from 'apps/my-barbershop/src/app/shared/apis/storefront.api';
 import { iStorefront } from 'apps/my-barbershop/src/app/shared/interfaces/storefront.interface';
+import { DownloadStoragePipe } from 'apps/my-barbershop/src/app/widget/pipes/download-storage/download-storage.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -32,6 +33,7 @@ import { RealtimeChannel } from '@supabase/supabase-js';
     NzStatisticModule,
     NzTypographyModule,
     NzIconModule,
+    DownloadStoragePipe,
   ],
   templateUrl: './storefront.page.html',
   styleUrl: './storefront.page.scss',

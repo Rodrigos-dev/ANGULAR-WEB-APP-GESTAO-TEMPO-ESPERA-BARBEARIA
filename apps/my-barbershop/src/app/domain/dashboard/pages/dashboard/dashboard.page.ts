@@ -1,4 +1,6 @@
+import { StorageApi } from 'apps/my-barbershop/src/app/shared/apis/storage.api';
 import { StorefrontApi } from 'apps/my-barbershop/src/app/shared/apis/storefront.api';
+import { eBucketName } from 'apps/my-barbershop/src/app/shared/enums/bucket-name.enum';
 import { iStorefront } from 'apps/my-barbershop/src/app/shared/interfaces/storefront.interface';
 import { CompanyService } from 'apps/my-barbershop/src/app/shared/services/company/company.service';
 import { iDynamicFormConfig } from 'apps/my-barbershop/src/app/widget/components/dynamic-form/dynamic-form-config.interface';
@@ -53,6 +55,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   private readonly companyService = inject(CompanyService);
   private readonly notificationService = inject(NzNotificationService);
   private readonly modal = inject(NzModalService);
+  private readonly storageApi = inject(StorageApi);
 
   storefrontData = signal<iStorefront | null>(null);
   isOpen = signal<boolean>(false);
@@ -192,10 +195,17 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   async submit() {
     const formValues = this.dynamicForm?.form.value;
+    const storefront = this.storefrontData();
+
+    const photo = formValues.photo !== storefront?.photo ? await this.storageApi.insert(eBucketName.AVATARS, formValues.photo, storefront?.photo) : storefront?.photo;
 
     const { error } = await this.storefrontApi.insertOrUpdate({
       id: this.storefrontData()?.id,
       ...formValues,
+      ...storefront,
+      ...formValues,
+      photo: photo || '',
+      is_open: this.isOpen(),
     });
     if (error) {
       this.notificationService.error('Erro', 'Ocorreu um erro ao salvar as configurações.');
@@ -257,7 +267,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     try {
       await this.autoSaveTimeAndStatus();
     } catch (error) {
-      console.error('Erro no autosave: - dashboard.page.ts:260', error);
+      console.error('Erro no autosave: - dashboard.page.ts:270', error);
     } finally {
       this.isSaving = false;
     }
@@ -285,7 +295,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     // Calcula a diferença
     const difference = currentValue - previousValue;
 
-    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:288`);
+    console.log(`Slider: ${previousValue} > ${currentValue}, Diferença: ${difference} - dashboard.page.ts:298`);
 
     // ⭐ Só executa se houver mudança real no valor (diferença != 0)
     if (difference !== 0) {
@@ -327,7 +337,7 @@ export class DashboardPage implements OnInit, OnDestroy {
     clearInterval(this.sliderUpdateInterval);
 
     this.sliderUpdateInterval = setInterval(() => {
-      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:330');
+      console.log('Atualizando slider pelo tempo real - dashboard.page.ts:340');
       this.updateSliderFromCurrentTime();
     }, 60000);
   }
