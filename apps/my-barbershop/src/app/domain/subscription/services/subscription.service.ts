@@ -54,24 +54,7 @@ export class SubscriptionService {
     return this.form.get('plan') as FormGroup;
   }
 
-  // async submit() {
-  //   try {
-  //     await this.createAdminUser(this.getAdminForm());
-  //     const createdCompany = await this.createCompany(this.getCompanyForm());
-  //     await this.createSubscription(createdCompany.id);
-
-  //     localStorage.removeItem('subscription-form');
-
-  //     this.router.navigate(['/']);
-  //     this.form.reset();
-  //   } catch (error: unknown) {
-  //     if (error instanceof Error) this.messageService.error(error.message);
-  //     else this.messageService.error('Erro ao criar assinatura');
-  //   }
-  // }
-
   async submit(): Promise<void> {
-    // Apenas LÓGICA DE NEGÓCIO/DADOS
     await this.createAdminUser(this.getAdminForm());
     const createdCompany = await this.createCompany(this.getCompanyForm());
     await this.createSubscription(createdCompany.id);

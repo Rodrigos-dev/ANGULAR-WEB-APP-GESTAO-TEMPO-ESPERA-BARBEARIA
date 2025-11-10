@@ -80,10 +80,14 @@ export class SelectPlanComponent implements OnInit, AfterViewInit {
   }
 
   async submit() {
-    this.submitWaiting.set(true);
-
     try {
+      this.submitWaiting.set(true);
+
       await this.subscriptionService.submit();
+
+      localStorage.removeItem('subscription-form');
+
+      this.router.navigate(['/']);
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.messageService.error(error.message);
