@@ -1,0 +1,9 @@
+<nz-card>
+  <nz-segmented nzBlock [nzOptions]="segmentedOptions" (nzValueChange)="handleValueChange($event)"></nz-segmented>
+
+  <br />
+
+  <form [formGroup]="subscriptionService.form" mbFormStorage="subscription-form">
+    <router-outlet />
+  </form>
+</nz-card>

@@ -16,7 +16,7 @@
         </a>
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <ul nz-menu nzSelectable="false">
-            <li nz-menu-item>
+            <li nz-menu-item [routerLink]="['/subscription', 'detail']">
               <i nz-icon nzType="user"></i>
               <span>Editar perfil</span>
             </li>

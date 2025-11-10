@@ -133,7 +133,7 @@ export class DashboardPage implements OnInit, OnDestroy {
       this.isOpen.set(storefront.is_open || false);
       this.updateDeadline();
 
-      const currentWaitingTime = this.calculateCurrentWaitingTime(); // Você precisa implementar esta função
+      const currentWaitingTime = this.calculateCurrentWaitingTime();
       this.previousSliderValue.set(currentWaitingTime);
       this.sliderValue.set(currentWaitingTime);
       this.updateSliderFromRealCurrentTime();

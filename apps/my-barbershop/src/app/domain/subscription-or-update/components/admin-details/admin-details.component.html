@@ -1,16 +1,42 @@
+<br />
+
 <h2>Detalhes do administrador</h2>
 
+@if(!isUpdate){
 <span class="description" nz-typography nzType="secondary"> Utilizaremos os dados abaixo para criar sua conta no sistema. </span>
+}
+
+<br />
 
 <mb-dynamic-form [config]="formConfig" />
 
-<nz-flex nzGap="small" nzJustify="center">
-  <button nz-button nzType="primary" [routerLink]="['/auth']">
+<br />
+
+@if(submitUpdate()){
+<br />
+
+<nz-spin nzTip="Aguarde..."></nz-spin>
+
+<br />
+}@else {
+
+<nz-flex nzGap="small">
+  <button nz-button nzType="primary" nzDanger [routerLink]="['/dashboard']" style="flex: 1">
     <i nz-icon nzType="arrow-left"></i>
-    Voltar Login
+    Voltar
   </button>
+
+  @if(isUpdate){
+  <button nz-button nzType="primary" (click)="submitChanges()" style="flex: 1" [disabled]="!hasChanges">
+    Salvar Alterações
+    <i nz-icon nzType="arrow-right"></i>
+  </button>
+  }@else{
   <button nz-button nzType="primary" [routerLink]="['/subscription', 'company']">
     Próxima etapa
     <i nz-icon nzType="arrow-right"></i>
   </button>
+  }
 </nz-flex>
+
+}

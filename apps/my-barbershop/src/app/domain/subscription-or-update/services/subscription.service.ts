@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { injectSupabase } from '../../../shared/functions/inject-supabase.function';
 import { iCompany } from '../../../shared/interfaces/company.interface';
 import { eUserStatus } from '../../auth/enums/user-status.enum';
+import { iUserUpdate } from '../../auth/interfaces/user-update.interface';
 import { AuthService } from '../../auth/services/auth/auth.service';
 import { UserCompanyApi } from '../apis/user-company.api';
 import { eSubscriptionStep } from '../enums/subscription-step.enum';
@@ -147,5 +148,51 @@ export class SubscriptionService {
     }
 
     return data;
+  }
+
+  async getUserById(userId: string): Promise<any> {
+    const { data: user, error } = await this.supabase.from('users').select('*').eq('id', userId).single();
+
+    if (error) {
+      throw new Error(`Erro ao buscar usuário: ${error.message}`);
+    }
+
+    if (!user) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    return user;
+  }
+
+  async submitUpdateUser(userData: iUserUpdate, userId: string) {
+    const updateData: Partial<iUserUpdate> = {};
+
+    if (userData.name !== undefined) {
+      updateData.full_name = userData.name;
+    }
+    if (userData.email !== undefined) {
+      updateData.email = userData.email;
+    }
+    if (userData.phone !== undefined) {
+      updateData.phone = userData.phone;
+    }
+
+    const cleanData = Object.fromEntries(Object.entries(updateData).filter(([_, value]) => value !== '' && value !== null && value !== undefined));
+
+    if (Object.keys(cleanData).length === 0) {
+      throw new Error('Nenhum dado válido para atualizar');
+    }
+
+    const { error } = await this.supabase.from('users').update(cleanData).eq('id', userId);
+
+    if (error) {
+      throw new Error(`Erro ao atualizar usuário: ${error.message}`);
+    }
+
+    await this.supabase.auth.updateUser({
+      data: cleanData,
+    });
+
+    await this.authService.load();
   }
 }
