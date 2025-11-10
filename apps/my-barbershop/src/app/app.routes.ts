@@ -5,7 +5,7 @@ import { authGuard } from './core/guards/auth/auth.guard';
 export const appRoutes: Route[] = [
   {
     path: 'subscription',
-    loadChildren: () => import('./domain/subscription/subscription.routes').then(m => m.SUBSCRIPTION_ROUTES),
+    loadChildren: () => import('./domain/subscription-or-update/subscription.routes').then(m => m.SUBSCRIPTION_ROUTES),
   },
   {
     path: 'auth',
