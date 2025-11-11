@@ -1,10 +1,5 @@
 # 📱 Dashboard Admin - Interface para barbearias ajustarem tempo
 
-https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular
-https://img.shields.io/badge/NX-Monorepo-143157?style=for-the-badge&logo=nx
-https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=for-the-badge&logo=supabase
-https://img.shields.io/badge/Stripe-Payments-008CDD?style=for-the-badge&logo=stripe
-
 Sistema SaaS completo para barbearias gerenciarem tempo de espera em tempo real, com página pública para clientes e dashboard administrativo.
 
 🎯 Funcionalidades
@@ -97,25 +92,29 @@ State: RxJS Services
 
 Real-time: Supabase Subscriptions
 
-
 ## 🖼️ Capturas de Tela
 
 <p align="center" width="100%">
   <table align="center" width="100%">
     <tr>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/969a99dc-8d63-4c65-811e-381835f25a6c" alt="Dashboard Público"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/19810a4a-d789-4cbb-bcd4-9b97730f2c78" alt="Dashboard Superior"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/a98db251-1940-4508-8139-57eb7e44daf6" alt="Página Dashboard"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/a0282121-ff64-4df5-95ac-d5738ca67123" alt="Captura de tela 1"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/631db485-29e3-48a0-9fba-53e5ca2ad66f" alt="Captura de tela 2"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/05067bd3-d4de-4f18-9071-2f07b1aa3bc1" alt="Captura de tela 3"/></td>
     </tr>
     <tr>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/9859a7c0-9861-4b8b-91b5-7ca9c1016d0b" alt="Contador Estatística"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/2eaaeed0-0cb1-40fb-b87a-fe0c026aa8a8" alt="Botões Tempo Pré-configurado"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/e306b789-8e73-45be-9f18-951efac9d0bc" alt="Botões e Log"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/66f79b42-334f-434c-aacb-e8fab83dd835" alt="Captura de tela 4"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/fe1591a4-8ef1-4b72-89ae-62392be2129d" alt="Captura de tela 5"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/d9322018-daed-425e-b5f4-7d6e4d91d5b5" alt="Captura de tela 6"/></td>
     </tr>
     <tr>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/07cc7858-c481-4365-88a3-1345dc19cceb" alt="Dashboard com Cards"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/f0c666e5-bd0f-4085-9fe7-f1cf55dbc6b0" alt="Modal QR Code"/></td>
-      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/d069043b-1db6-4e08-94df-4014659aa0ee" alt="Header com Logo"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/860abec4-6531-4f7e-8ffa-847d005573b2" alt="Captura de tela 7"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/0f547301-91fd-4cf4-811a-e62175642ae2" alt="Captura de tela 8"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/a5744eeb-59d8-422d-a400-e832f11464cb" alt="Captura de tela 9"/></td>
+    </tr>
+    <tr>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/b34138bf-7472-4644-9226-06f39c2c5833" alt="Captura de tela 10"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/4fe2d1ab-7252-46c2-83de-db9702628bf5" alt="Captura de tela 11"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/1b763643-3f4b-488f-8fff-b7ec8f532796" alt="Captura de tela 12"/></td>
     </tr>
   </table>
 </p>
