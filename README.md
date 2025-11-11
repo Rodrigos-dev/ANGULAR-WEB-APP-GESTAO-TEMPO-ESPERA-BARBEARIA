@@ -1,101 +1,121 @@
-# MyBarbershop
+# 📱 Dashboard Admin - Interface para barbearias ajustarem tempo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular
+https://img.shields.io/badge/NX-Monorepo-143157?style=for-the-badge&logo=nx
+https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=for-the-badge&logo=supabase
+https://img.shields.io/badge/Stripe-Payments-008CDD?style=for-the-badge&logo=stripe
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+Sistema SaaS completo para barbearias gerenciarem tempo de espera em tempo real, com página pública para clientes e dashboard administrativo.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+🎯 Funcionalidades
+✨ Principais
 
-## Run tasks
+⏰ Gestão de Tempo de Espera - Controle em tempo real do tempo médio de espera
 
-To run the dev server for your app, use:
+🌐 Página Pública - Clientes visualizam tempo estimado sem login
 
-```sh
-npx nx serve my-barbershop
-```
+📱 Dashboard Admin - Interface para barbearias ajustarem tempo
 
-To create a production bundle:
+🔄 Atualizações em Tempo Real - Alterações refletem instantaneamente
 
-```sh
-npx nx build my-barbershop
-```
+💳 Sistema de Assinaturas
 
-To see all available targets to run for a project, run:
+📦 Planos Flexíveis - Diferentes níveis de assinatura
 
-```sh
-npx nx show project my-barbershop
-```
+🆓 Trial 14 Dias - Período gratuito para teste
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+💳 Pagamento com Stripe - Integração
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Add new projects
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+👥 Gestão de Clientes
 
-Use the plugin's generator to create new projects.
+⏱️ Admin altera o tempo desejado para + oi - pelo Slider ou nos botões pré configurados
 
-To generate a new application, use:
 
-```sh
-npx nx g @nx/angular:app demo
-```
+🔐 Autenticação & Segurança
 
-To generate a new library, use:
+👤 Cadastro Multi-etapas - Experiência guiada
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+🔐 Login Seguro - Autenticação com Supabase
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+📧 Confirmação de Email - Validação de usuários
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+🔒 Recuperação de Senha - Fluxo completo via email
 
-## Set up CI!
 
-### Step 1
+🏪 Gestão da Barbearia
 
-To connect to Nx Cloud, run the following command:
+📝 Dados da Loja - Configuração completa
 
-```sh
-npx nx connect
-```
+📊 Edição de Perfil - Admin e empresa
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+📤 Compartilhamento - QR Code e link copiável
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+🎨 Personalização - Branding da barbearia
 
-### Step 2
+🚀 Próximas Funcionalidades
+💳 Página de Cartão - Gestão pós-trial de 14 dias
 
-Use the following command to configure a CI workflow for your workspace:
+🔄 Alteração de Planos - Interface para mudanças
 
-```sh
-npx nx g ci-workflow
-```
+👥 Auto-gestão de Fila - Clientes se auto-adicionam/removem
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+📊 Ordenação de Filas - Sistema inteligente de prioridades
 
-## Install Nx Console
+🏗️ Arquitetura
+📁 Estrutura do Projeto (Domain-Driven Design)
+text
+apps/my-barbershop/
+├── 🎯 domain/           # Domínios de negócio
+│   ├── auth/           # Autenticação & usuários
+│   ├── dashboard/      # Painel administrativo  
+│   ├── storefront/     # Página pública
+│   └── subscription/   # Assinaturas & pagamentos
+├── 🔧 core/            # Núcleo da aplicação
+│   ├── guards/         # Proteção de rotas
+│   ├── layout/         # Layouts da aplicação
+│   └── pages/          # Páginas globais
+├── 📦 shared/          # Recursos compartilhados
+│   ├── services/       # Serviços globais
+│   ├── interfaces/     # Interfaces comuns
+│   └── utils/          # Utilitários
+└── 🧩 widget/          # Componentes reutilizáveis
+    ├── components/     # Componentes UI
+    ├── directives/     # Diretivas customizadas
+    └── pipes/          # Pipes personalizados
+🛠️ Stack Tecnológica
+Frontend: Angular 19 + NX Monorepo + NG-Zorro
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Backend: Supabase (Auth, DB, Storage, Edge Functions)
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Payments: Stripe Integration
 
-## Useful links
+Styling: SCSS + Less Theming
 
-Learn more:
+State: RxJS Services
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Real-time: Supabase Subscriptions
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+## 🖼️ Capturas de Tela
+
+<p align="center" width="100%">
+  <table align="center" width="100%">
+    <tr>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/969a99dc-8d63-4c65-811e-381835f25a6c" alt="Dashboard Público"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/19810a4a-d789-4cbb-bcd4-9b97730f2c78" alt="Dashboard Superior"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/a98db251-1940-4508-8139-57eb7e44daf6" alt="Página Dashboard"/></td>
+    </tr>
+    <tr>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/9859a7c0-9861-4b8b-91b5-7ca9c1016d0b" alt="Contador Estatística"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/2eaaeed0-0cb1-40fb-b87a-fe0c026aa8a8" alt="Botões Tempo Pré-configurado"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/e306b789-8e73-45be-9f18-951efac9d0bc" alt="Botões e Log"/></td>
+    </tr>
+    <tr>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/07cc7858-c481-4365-88a3-1345dc19cceb" alt="Dashboard com Cards"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/f0c666e5-bd0f-4085-9fe7-f1cf55dbc6b0" alt="Modal QR Code"/></td>
+      <td align="center"><img width="300" src="https://github.com/user-attachments/assets/d069043b-1db6-4e08-94df-4014659aa0ee" alt="Header com Logo"/></td>
+    </tr>
+  </table>
+</p>
