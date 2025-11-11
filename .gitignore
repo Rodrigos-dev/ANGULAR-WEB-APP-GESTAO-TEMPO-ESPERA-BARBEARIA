@@ -43,5 +43,10 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+/src/environments/environment.ts
+/src/environments/environment.prod.ts
+/apps/my-barbershop/src/environments/environment.ts
+/apps/my-barbershop/src/environments/environment.prod.ts
+
 .angular
 .env
