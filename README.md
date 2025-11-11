@@ -1,5 +1,7 @@
 # 📱 Dashboard Admin - Interface para barbearias ajustarem tempo
 
+DEPLOY - https://angular-base-1-0-web-app-gestao-tem.vercel.app/
+
 Sistema SaaS completo para barbearias gerenciarem tempo de espera em tempo real, com página pública para clientes e dashboard administrativo.
 
 🎯 Funcionalidades
