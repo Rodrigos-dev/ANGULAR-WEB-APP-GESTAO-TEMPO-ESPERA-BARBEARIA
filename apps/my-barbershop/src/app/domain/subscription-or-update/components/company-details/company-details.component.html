@@ -1,9 +1,26 @@
 <h2>Detalhes da empresa</h2>
 
+@if(!isUpdate){
 <span class="description" nz-typography nzType="secondary"> Agora precisamos de algumas informações sobre a sua empresa. </span>
+}
 
 <mb-dynamic-form [config]="formConfig" />
 
+@if(isUpdate){ @if(submitUpdate()){
+<br />
+
+<nz-spin nzTip="Aguarde..."></nz-spin>
+
+<br />
+}@else {
+<nz-flex nzGap="small" nzJustify="center">
+  <button nz-button nzBlock nzType="primary" [disabled]="!hasChanges" (click)="submit()">
+    Salvar Alterações
+    <i nz-icon nzType="arrow-right"></i>
+  </button>
+</nz-flex>
+
+} }@else {
 <nz-flex nzGap="small" nzJustify="center">
   <button nz-button nzType="primary" [routerLink]="['/subscription', 'admin']">
     <i nz-icon nzType="arrow-left"></i>
@@ -14,3 +31,4 @@
     <i nz-icon nzType="arrow-right"></i>
   </button>
 </nz-flex>
+}

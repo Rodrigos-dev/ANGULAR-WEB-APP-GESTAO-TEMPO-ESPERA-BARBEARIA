@@ -195,4 +195,38 @@ export class SubscriptionService {
 
     await this.authService.load();
   }
+
+  async submitUpdateCompany(companyData: any, companyId: string): Promise<void> {
+    const { name, zip_code, street, number, complement, neighborhood, city, state, country } = companyData;
+
+    const updateData: any = {};
+
+    if (name !== undefined) updateData.name = name;
+
+    const addressFields = { zip_code, street, number, complement, neighborhood, city, state, country };
+    const hasAddressChanges = Object.values(addressFields).some(value => value !== undefined);
+
+    if (hasAddressChanges) {
+      updateData.address = {};
+
+      if (zip_code !== undefined) updateData.address.zip_code = zip_code;
+      if (street !== undefined) updateData.address.street = street;
+      if (number !== undefined) updateData.address.number = number;
+      if (complement !== undefined) updateData.address.complement = complement;
+      if (neighborhood !== undefined) updateData.address.neighborhood = neighborhood;
+      if (city !== undefined) updateData.address.city = city;
+      if (state !== undefined) updateData.address.state = state;
+      if (country !== undefined) updateData.address.country = country;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      throw new Error('Nenhum dado válido para atualizar');
+    }
+
+    const { error } = await this.supabase.from('company').update(updateData).eq('id', companyId);
+
+    if (error) {
+      throw new Error(`Erro ao atualizar empresa: ${error.message}`);
+    }
+  }
 }

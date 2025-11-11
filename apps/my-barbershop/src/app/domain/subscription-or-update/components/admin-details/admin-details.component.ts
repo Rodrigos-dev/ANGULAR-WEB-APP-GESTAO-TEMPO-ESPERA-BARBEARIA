@@ -5,6 +5,7 @@ import { DynamicFormComponent } from 'apps/my-barbershop/src/app/widget/componen
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSpinComponent } from 'ng-zorro-antd/spin';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { debounceTime, map, Subject, takeUntil } from 'rxjs';
@@ -30,6 +31,7 @@ export class AdminDetailsComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly authService = inject(AuthService);
   protected loadingService = inject(LoadingService);
+  private readonly messageService = inject(NzMessageService);
 
   isUpdate = false;
   private originalValues: any = {};
@@ -151,7 +153,12 @@ export class AdminDetailsComponent implements AfterViewInit, OnInit, OnDestroy {
 
         this.originalValues = { ...this.originalValues, ...changedValues };
         this.hasChanges = false;
+
+        this.messageService.success('Usuário atualizado com sucesso!');
       }
+    } catch (error) {
+      this.messageService.error('Erro ao Atualizar usuário');
+      console.log(`Exception while doing something: ${error}  companydetails.component.ts:97 - admin-details.component.ts:161`);
     } finally {
       localStorage.removeItem('subscription-form');
       this.dynamicForm.form.reset();
