@@ -25,7 +25,7 @@ Sistema SaaS completo para barbearias gerenciarem tempo de espera em tempo real,
 
 👥 Gestão de Clientes
 
-⏱️ Admin altera o tempo desejado para + oi - pelo Slider ou nos botões pré configurados
+⏱️ Admin altera o tempo desejado para + ou - pelo Slider ou nos botões pré configurados
 
 
 🔐 Autenticação & Segurança
